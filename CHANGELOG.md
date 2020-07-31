@@ -1,5 +1,9 @@
 # Tabellen von ChessResults einbinden
 
+## Version 1.0.1 (2020-07-31)
+
+* Template bereinigt von Debug-Ausgabe
+
 ## Version 1.0.0 (2020-07-31)
 
 * Add Teilnehmerliste, alphabetisch und nach Startrang

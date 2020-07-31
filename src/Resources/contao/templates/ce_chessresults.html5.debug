@@ -6,4 +6,12 @@
 
 <p><?= $this->chessresults_link ?></p>
 
+<pre>
+<?= $this->debug ?>
+</pre>
+
+<pre>
+<?= $this->raw ?>
+</pre>
+
 <?php $this->endblock(); ?>
