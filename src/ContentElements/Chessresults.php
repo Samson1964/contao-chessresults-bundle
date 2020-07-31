@@ -142,10 +142,12 @@ class Chessresults extends \ContentElement
 		// Template befüllen
 		$this->Template->class = "ce_chessresults";
 		$this->Template->raw = print_r($result['raw'], true);
-		$this->Template->content = $result['content'];
+		$this->Template->tabelle = $result['content'];
 		$url = str_replace('iframe=NOADV&css=2&', '', $url); // URL bereinigen
 		$this->Template->chessresults_link = '<a href="'.$url.'" target="_blank">Anzeigen auf ChessResults</a>';
 		$this->Template->debug = print_r($this->debug, true);;
+		$this->Template->meta = 'Aktualisiert am '.$this->debug['Letzte Aktualisierung'];
+
 
 		return;
 
@@ -213,6 +215,7 @@ class Chessresults extends \ContentElement
 	{
 
 		$this->debug['this-SichtbareSpalten'] = $this->SichtbareSpalten;
+		if(!$tabelle) return array('raw' => '', 'content' => '');
 
 		// Tabelle in table schreiben
 		$content = '<table>';
@@ -309,11 +312,21 @@ class Chessresults extends \ContentElement
 	{
 		$temp = strip_tags($string); // HTML-Tags entfernen
 		$temp = str_replace(' *)', '', $temp); // Hinweis fixes Brett entfernen
-		$leerzeichen = strpos($temp, ' '); // 1. Leerzeichen suchen
-		if($leerzeichen)
+		$temp = str_replace(',', ', ', $temp); // Leerzeichen hinter Komma einfügen
+		$temp = str_replace('  ', ' ', $temp); // Doppelte Leerzeichen auf ein Leerzeichen reduzieren
+
+		// Nach Komma(s) im Namen suchen, falls "Nachname,Vorname" übergeben wurde
+		$komma = strpos($temp, ','); // 1. Komma suchen
+		if(!$komma)
 		{
-			$temp = substr($temp, 0, $leerzeichen).','.substr($temp, $leerzeichen);
+			// Keine Kommas im Namen, dann welche setzen
+			$leerzeichen = strpos($temp, ' '); // 1. Leerzeichen suchen
+			if($leerzeichen)
+			{
+				$temp = substr($temp, 0, $leerzeichen).','.substr($temp, $leerzeichen);
+			}
 		}
+
 		return $temp;
 	}
 
@@ -336,6 +349,7 @@ class Chessresults extends \ContentElement
 
 			$this->debug['Cache vorhanden'] = true;
 			$this->debug['Cache-Datum'] = date('d.m.Y H:i:s', $this->cache['zeit']);
+			$this->debug['Letzte Aktualisierung'] = date('d.m.Y H:i', $this->cache['zeit']);
 			$this->debug['Cache benutzt'] = false;
 
 			if($this->chessresults_live)
@@ -397,6 +411,8 @@ class Chessresults extends \ContentElement
 				'zeit'  => time(),
 				'daten' => $tabelle
 			);
+
+			$this->debug['Letzte Aktualisierung'] = date('d.m.Y H:i', $daten['zeit']);
 
 			$set = array
 			(

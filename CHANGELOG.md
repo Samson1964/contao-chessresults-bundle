@@ -1,5 +1,11 @@
 # Tabellen von ChessResults einbinden
 
+## Version 1.0.2 (2020-07-31)
+
+* Fix: Spalte Elo wurde nicht angezeigt
+* Add: Anzeige der letzten Aktualisierung
+* Fix: Komma im Namen
+
 ## Version 1.0.1 (2020-07-31)
 
 * Template bereinigt von Debug-Ausgabe
