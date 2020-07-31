@@ -12,4 +12,4 @@
  */
 
 $GLOBALS['TL_LANG']['CTE']['schach'] = "Schach-Elemente";
-$GLOBALS['TL_LANG']['CTE']['chessresults'] = array('Chess-Results.com einbinden', 'Tabellen von Chess-Results.com einbinden');
+$GLOBALS['TL_LANG']['CTE']['chessresults'] = array('Chess-Results', 'Tabellen von Chess-Results.com einbinden');
