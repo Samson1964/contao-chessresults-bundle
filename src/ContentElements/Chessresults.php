@@ -151,7 +151,6 @@ class Chessresults extends \ContentElement
 		$this->Template->debug = print_r($this->debug, true);;
 		$this->Template->meta = 'Aktualisiert am '.$this->debug['Letzte Aktualisierung'];
 
-
 		return;
 
 	}

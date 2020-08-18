@@ -1,5 +1,9 @@
 # Tabellen von ChessResults einbinden
 
+## Version 1.0.5 (2020-08-19)
+
+* ce_table als Klasse funktioniert nicht richtig - neuer Versuch
+
 ## Version 1.0.4 (2020-08-18)
 
 * Changelog in UTF-8 umgewandelt
