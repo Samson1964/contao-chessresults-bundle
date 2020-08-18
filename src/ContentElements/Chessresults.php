@@ -21,7 +21,7 @@ class Chessresults extends \ContentElement
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'ce_chessresults_debug';
+	protected $strTemplate = 'ce_chessresults';
 
 	var $Spalte = array();
 	var $SpaltePos = array();
