@@ -21,11 +21,12 @@ class Chessresults extends \ContentElement
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'ce_chessresults';
+	protected $strTemplate = 'ce_chessresults_debug';
 
 	var $Spalte = array();
 	var $SpaltePos = array();
 	var $SichtbareSpalten = array();
+	var $Tabellenzeilentyp = array();
 	var $debug = array();
 	var $cache;
 
@@ -118,6 +119,7 @@ class Chessresults extends \ContentElement
 			{
 				// Daten aus dem Cache verarbeiten
 				self::AnalysiereTabelle($cache);
+				self::checkTabellentyp($cache);
 				$result = self::ImportTabelle($cache);
 			}
 			else
@@ -126,6 +128,7 @@ class Chessresults extends \ContentElement
 				$daten = file_get_contents($url);
 				$tabelle = self::ImportHTML($daten);
 				self::AnalysiereTabelle($tabelle);
+				self::checkTabellentyp($tabelle);
 				$result = self::ImportTabelle($tabelle);
 			}
 
@@ -140,7 +143,7 @@ class Chessresults extends \ContentElement
 		$this->debug['Abfragezeit'] = sprintf('%.5f', $dauer).' Sekunden';
 
 		// Template befüllen
-		$this->Template->class = "ce_chessresults";
+		$this->Template->class = "ce_table ce_chessresults";
 		$this->Template->raw = print_r($result['raw'], true);
 		$this->Template->tabelle = $result['content'];
 		$url = str_replace('iframe=NOADV&css=2&', '', $url); // URL bereinigen
@@ -151,6 +154,32 @@ class Chessresults extends \ContentElement
 
 		return;
 
+	}
+
+	private function checkTabellentyp($tabelle)
+	{
+		$this->Tabellenzeilentyp = array(); // Array für Tabellenzeilentypen initialisieren
+
+		for($row = 0; $row < count($tabelle); $row++)
+		{
+			$spalten = count($tabelle[$row]);
+			if($spalten == 1) 
+			{
+				$this->Tabellenzeilentyp[$row] = 'Runde';
+				$this->Tabellenzeilentyp[$row + 1] = 'Kopf';
+			}
+			else
+			{
+				// Wenn Typ noch nicht festgelegt, dann jetzt machen
+				if(!$this->Tabellenzeilentyp[$row])
+				{
+					if($row == 0) $this->Tabellenzeilentyp[$row] = 'Kopf';
+					else $this->Tabellenzeilentyp[$row] = 'Daten';
+				}
+			}
+		}
+
+		$this->debug['this-Tabellenzeilentyp'] = $this->Tabellenzeilentyp;
 	}
 
 	private function ImportHTML($string)
@@ -239,6 +268,7 @@ class Chessresults extends \ContentElement
 						case 'Name': $value = self::getName($tabelle[$x][$y]); break; // Name konvertieren
 						case 'Ergebnis': $value = self::getErgebnis($tabelle[$x][$y]); break; // Ergebnis konvertieren
 						default: $value = $tabelle[$x][$y];
+							if(self::is_utf8($value)) $value = utf8_decode($value);
 					}
 				}
 				else
@@ -308,8 +338,27 @@ class Chessresults extends \ContentElement
 		$this->Spalte = $neu;
 	}
 
+	function is_utf8($str)
+	{
+		$strlen = strlen($str);
+		for($i=0; $i < $strlen; $i++)
+		{
+			$ord = ord($str[$i]);
+			if($ord < 0x80) continue; // 0bbbbbbb
+			elseif(($ord&0xE0)===0xC0 && $ord>0xC1) $n = 1; // 110bbbbb (exkl C0-C1)
+			elseif(($ord&0xF0)===0xE0) $n = 2; // 1110bbbb
+			elseif(($ord&0xF8)===0xF0 && $ord<0xF5) $n = 3; // 11110bbb (exkl F5-FF)
+			else return false; // ungültiges UTF-8-Zeichen
+			for($c=0; $c<$n; $c++) // $n Folgebytes? // 10bbbbbb
+				if(++$i===$strlen || (ord($str[$i])&0xC0)!==0x80)
+					return false; // ungültiges UTF-8-Zeichen
+		}
+		return true; // kein ungültiges UTF-8-Zeichen gefunden
+	}
+
 	private function getName($string)
 	{
+		if(self::is_utf8($string)) $string = utf8_decode($string);
 		$temp = strip_tags($string); // HTML-Tags entfernen
 		$temp = str_replace(' *)', '', $temp); // Hinweis fixes Brett entfernen
 		$temp = str_replace(',', ', ', $temp); // Leerzeichen hinter Komma einfügen

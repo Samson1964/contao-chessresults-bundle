@@ -2,7 +2,12 @@
 
 <?php $this->block('content'); ?>
 
-<?= $this->content ?>
+<?php if($this->tabelle): ?>
+	<?= $this->tabelle ?>
+	<div class="meta"><?= $this->meta ?></div>
+<?php else: ?>
+	<p>Es liegen noch keine Daten vor.</p>
+<?php endif; ?>
 
 <p><?= $this->chessresults_link ?></p>
 

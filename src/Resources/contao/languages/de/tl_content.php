@@ -28,7 +28,7 @@ $GLOBALS['TL_LANG']['tl_content']['chessresults_mode_array'] = array
 	'2'  => 'Teilnehmerliste, nach TWZ',
 	'3'  => 'Rangliste, nach Runde ... (Bitte Runde angeben!)',
 	'10' => 'Fortschrittstabelle',
-	'20' => 'Paarungen/Ergebnisse, nach Runde ... (Bitte Runde angeben!)',
+	'20' => 'Paarungen/Ergebnisse, von Runde ... (Bitte Runde angeben!)',
 );
 
 $GLOBALS['TL_LANG']['tl_content']['chessresults_type_array'] = array

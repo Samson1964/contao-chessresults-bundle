@@ -1,5 +1,11 @@
 # Tabellen von ChessResults einbinden
 
+## Version 1.0.3 (2020-08-18)
+
+* TODO.md hinzugefügt
+* ce_table als Klasse hinzugefügt
+* UTF-8-Erkennung von ChessResults verbessert
+
 ## Version 1.0.2 (2020-07-31)
 
 * Fix: Spalte Elo wurde nicht angezeigt
