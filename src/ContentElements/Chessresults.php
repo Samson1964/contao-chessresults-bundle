@@ -143,7 +143,7 @@ class Chessresults extends \ContentElement
 		$this->debug['Abfragezeit'] = sprintf('%.5f', $dauer).' Sekunden';
 
 		// Template befüllen
-		$this->Template->class = "ce_table ce_chessresults";
+		$this->Template->class = 'ce_chessresults ce_table';
 		$this->Template->raw = print_r($result['raw'], true);
 		$this->Template->tabelle = $result['content'];
 		$url = str_replace('iframe=NOADV&css=2&', '', $url); // URL bereinigen

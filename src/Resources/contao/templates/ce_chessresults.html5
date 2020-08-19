@@ -1,6 +1,6 @@
-<?php $this->extend('block_searchable'); ?>
+<div class="<?= $this->class ?> ce_table block"<?= $this->cssID ?><?php if ($this->style): ?>style="<?= $this->style ?>"<?php endif; ?>>
 
-<?php $this->block('content'); ?>
+<?php if ($this->headline): ?><<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>><?php endif; ?>
 
 <?php if($this->tabelle): ?>
 	<?= $this->tabelle ?>
@@ -11,4 +11,4 @@
 
 <p><?= $this->chessresults_link ?></p>
 
-<?php $this->endblock(); ?>
+</div>

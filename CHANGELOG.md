@@ -1,5 +1,10 @@
 # Tabellen von ChessResults einbinden
 
+## Version 1.0.6 (2020-08-19)
+
+* Neuer Versuch mit $this->Template->class = 'ce_chessresults ce_table'
+* Template geändert und block_searchable und content ausgetauscht
+
 ## Version 1.0.5 (2020-08-19)
 
 * ce_table als Klasse funktioniert nicht richtig - neuer Versuch
