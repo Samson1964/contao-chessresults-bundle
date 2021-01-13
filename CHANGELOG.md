@@ -1,5 +1,9 @@
 # Tabellen von ChessResults einbinden
 
+## Version 1.0.7 (2021-01-13)
+
+* Fix: Abhängigkeit paquettg/php-html-parser ^2.2 statt >=2.2 - In Version 3.1.1 wurde die Funktion load entfernt
+
 ## Version 1.0.6 (2020-08-19)
 
 * Neuer Versuch mit $this->Template->class = 'ce_chessresults ce_table'
