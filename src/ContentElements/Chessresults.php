@@ -36,6 +36,8 @@ class Chessresults extends \ContentElement
 	protected function compile()
 	{
 
+		\System::loadLanguageFile('tl_content'); // Sprachdateien laden
+
 		$beginn = microtime(true);
 
 		// Spalte-Array füllen, dazu definierte Spalten auslösen
