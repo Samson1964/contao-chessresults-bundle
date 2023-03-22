@@ -1,5 +1,10 @@
 # Tabellen von ChessResults einbinden
 
+## Version 1.1.1 (2023-03-22)
+
+* Fix: Fehler bzgl. PHP 8
+* Fix: An exception occurred while executing a query: SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'chessresults_cacheStorage' at row 1 -> chessresults_cacheStorage -> LONGBLOB
+
 ## Version 1.1.0 (2023-03-22)
 
 * Change: Abhängigkeit PHP 8 hergestellt

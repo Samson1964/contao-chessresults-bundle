@@ -117,6 +117,7 @@ class Chessresults extends \ContentElement
 			// CACHE-ABFRAGE
 			// ======================================================
 			$cache = self::getCache(); // Cache laden
+			$tabelle = '';
 			if($cache)
 			{
 				// Daten aus dem Cache verarbeiten
@@ -172,7 +173,7 @@ class Chessresults extends \ContentElement
 			else
 			{
 				// Wenn Typ noch nicht festgelegt, dann jetzt machen
-				if(!$this->Tabellenzeilentyp[$row])
+				if(!isset($this->Tabellenzeilentyp[$row]))
 				{
 					if($row == 0) $this->Tabellenzeilentyp[$row] = 'Kopf';
 					else $this->Tabellenzeilentyp[$row] = 'Daten';
@@ -217,7 +218,7 @@ class Chessresults extends \ContentElement
 			}
 		}
 
-		print_r($tabelle);
+		//print_r($tabelle);
 		return $tabelle;
 
 	}

@@ -108,7 +108,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['chessresults_live'] = array
 $GLOBALS['TL_DCA']['tl_content']['fields']['chessresults_cacheStorage'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['chessresults_cacheStorage'],
-	'sql'                     => 'blob NULL'
+	'sql'                     => 'longblob NULL'
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['chessresults_type'] = array
