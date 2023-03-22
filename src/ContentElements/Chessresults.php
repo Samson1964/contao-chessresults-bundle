@@ -217,6 +217,7 @@ class Chessresults extends \ContentElement
 			}
 		}
 
+		print_r($tabelle);
 		return $tabelle;
 
 	}
@@ -269,7 +270,7 @@ class Chessresults extends \ContentElement
 						case 'Name': $value = self::getName($tabelle[$x][$y]); break; // Name konvertieren
 						case 'Ergebnis': $value = self::getErgebnis($tabelle[$x][$y]); break; // Ergebnis konvertieren
 						default: $value = $tabelle[$x][$y];
-							if(self::is_utf8($value)) $value = utf8_decode($value);
+							//if(self::is_utf8($value)) $value = utf8_decode($value);
 					}
 				}
 				else

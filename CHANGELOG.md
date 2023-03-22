@@ -1,5 +1,10 @@
 # Tabellen von ChessResults einbinden
 
+## Version 1.1.0 (2023-03-22)
+
+* Change: Abhängigkeit PHP 8 hergestellt
+* Fix: Chessresults.php -> UTF8-Dekodierung ist unnötig, da UTF8 ausgeliefert wird
+
 ## Version 1.0.8 (2021-08-19)
 
 * Add: Sprachdateien für Frontend eingebunden (Chessresults.php)
