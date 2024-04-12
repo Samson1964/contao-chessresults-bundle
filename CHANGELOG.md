@@ -1,5 +1,11 @@
 # Tabellen von ChessResults einbinden
 
+## Version 1.1.2 (2024-04-12)
+
+* Fix: PHP Warning:  count(): Parameter must be an array or an object that implements Countable in Chessresults.php on line 230
+* Fix: PHP Warning:  count(): Parameter must be an array or an object that implements Countable in Chessresults.php on line 167
+* Fix: PHP Warning:  count(): Parameter must be an array or an object that implements Countable in Chessresults.php on line 257
+
 ## Version 1.1.1 (2023-03-22)
 
 * Fix: Fehler bzgl. PHP 8

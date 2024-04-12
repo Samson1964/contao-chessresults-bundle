@@ -71,7 +71,7 @@ class Chessresults extends \ContentElement
 			// ======================================================
 
 			// Gewünschte sichtbare Spalten laden
-			if($this->chessresults_colsView) 
+			if($this->chessresults_colsView)
 			{
 				$temp = unserialize($this->chessresults_colsView);
 				foreach($temp as $key => $value)
@@ -162,21 +162,27 @@ class Chessresults extends \ContentElement
 	{
 		$this->Tabellenzeilentyp = array(); // Array für Tabellenzeilentypen initialisieren
 
-		for($row = 0; $row < count($tabelle); $row++)
+		if(is_array($tabelle))
 		{
-			$spalten = count($tabelle[$row]);
-			if($spalten == 1) 
+			for($row = 0; $row < count($tabelle); $row++)
 			{
-				$this->Tabellenzeilentyp[$row] = 'Runde';
-				$this->Tabellenzeilentyp[$row + 1] = 'Kopf';
-			}
-			else
-			{
-				// Wenn Typ noch nicht festgelegt, dann jetzt machen
-				if(!isset($this->Tabellenzeilentyp[$row]))
+				if(is_array($tabelle[$row]))
 				{
-					if($row == 0) $this->Tabellenzeilentyp[$row] = 'Kopf';
-					else $this->Tabellenzeilentyp[$row] = 'Daten';
+					$spalten = count($tabelle[$row]);
+					if($spalten == 1)
+					{
+						$this->Tabellenzeilentyp[$row] = 'Runde';
+						$this->Tabellenzeilentyp[$row + 1] = 'Kopf';
+					}
+					else
+					{
+						// Wenn Typ noch nicht festgelegt, dann jetzt machen
+						if(!isset($this->Tabellenzeilentyp[$row]))
+						{
+							if($row == 0) $this->Tabellenzeilentyp[$row] = 'Kopf';
+							else $this->Tabellenzeilentyp[$row] = 'Daten';
+						}
+					}
 				}
 			}
 		}
@@ -227,15 +233,18 @@ class Chessresults extends \ContentElement
 	{
 		if(!$tabelle) return false; // Keine Tabelle vorhanden
 
-		for($col = 0; $col < count($tabelle[0]); $col++)
+		if(is_array($tabelle[0]))
 		{
-			// Kopfzeile der Tabelle, hier die Spaltenpositionen sichern
+			for($col = 0; $col < count($tabelle[0]); $col++)
+			{
+				// Kopfzeile der Tabelle, hier die Spaltenpositionen sichern
 
-			// Spaltenname festlegen
-			if($tabelle[0][$col]) $spaltenname = $tabelle[0][$col];
-			else $spaltenname = 'Titel';
-			$this->SpaltePos[$spaltenname] = $col;
+				// Spaltenname festlegen
+				if($tabelle[0][$col]) $spaltenname = $tabelle[0][$col];
+				else $spaltenname = 'Titel';
+				$this->SpaltePos[$spaltenname] = $col;
 
+			}
 		}
 
 		$this->debug['this-Spalte'] = $this->Spalte;
@@ -254,35 +263,38 @@ class Chessresults extends \ContentElement
 		for($x = 0; $x < count($tabelle); $x++)
 		{
 			$content .= '<tr>';
-			for($y = 0; $y < count($tabelle[$x]); $y++)
+			if(is_array($tabelle[$x]))
 			{
-				if(!in_array($tabelle[0][$y], $this->SichtbareSpalten))
+				for($y = 0; $y < count($tabelle[$x]); $y++)
 				{
-					//echo 'Spaltenname = |'.$tabelle[0][$y].'| nicht gefunden<br>';
-					continue; // Unsichtbare Spalten überspringen
-				}
-
-				$content .= $x ? '<td>' : '<th>'; // Kopf- oder Datenzeile
-				if($x)
-				{
-					// Datenzeile
-					switch($tabelle[0][$y])
+					if(!in_array($tabelle[0][$y], $this->SichtbareSpalten))
 					{
-						case 'Name': $value = self::getName($tabelle[$x][$y]); break; // Name konvertieren
-						case 'Ergebnis': $value = self::getErgebnis($tabelle[$x][$y]); break; // Ergebnis konvertieren
-						default: $value = $tabelle[$x][$y];
-							//if(self::is_utf8($value)) $value = utf8_decode($value);
+						//echo 'Spaltenname = |'.$tabelle[0][$y].'| nicht gefunden<br>';
+						continue; // Unsichtbare Spalten überspringen
 					}
+
+					$content .= $x ? '<td>' : '<th>'; // Kopf- oder Datenzeile
+					if($x)
+					{
+						// Datenzeile
+						switch($tabelle[0][$y])
+						{
+							case 'Name': $value = self::getName($tabelle[$x][$y]); break; // Name konvertieren
+							case 'Ergebnis': $value = self::getErgebnis($tabelle[$x][$y]); break; // Ergebnis konvertieren
+							default: $value = $tabelle[$x][$y];
+								//if(self::is_utf8($value)) $value = utf8_decode($value);
+						}
+					}
+					else
+					{
+						// Kopfzeile
+						if($tabelle[$x][$y]) $spaltenname = $tabelle[$x][$y];
+						else $spaltenname = '';
+						$value = $this->Spalte[$spaltenname];
+					}
+					$content .= $value;
+					$content .= $x ? '</td>' : '</th>'; // Kopf- oder Datenzeile
 				}
-				else
-				{
-					// Kopfzeile
-					if($tabelle[$x][$y]) $spaltenname = $tabelle[$x][$y];
-					else $spaltenname = '';
-					$value = $this->Spalte[$spaltenname];
-				}
-				$content .= $value;
-				$content .= $x ? '</td>' : '</th>'; // Kopf- oder Datenzeile
 			}
 			$content .= '</tr>';
 		}
