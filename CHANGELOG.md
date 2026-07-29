@@ -1,4 +1,4 @@
-# Tabellen von ChessResults einbinden
+# ChessResults Changelog
 
 ## Version 1.1.2 (2024-04-12)
 
