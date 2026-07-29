@@ -1,5 +1,9 @@
 # ChessResults Changelog
 
+## Version 1.1.3 (2026-07-29)
+
+* Fix: Warning: Undefined array key "chessresults_colsView_array" bei contao:migrate -> Lesezugriffe auf $GLOBALS['TL_LANG'] in den DCA-Dateien mit `?? null` bzw. `?? array()` abgesichert, da der DcaLoader die Sprachdateien noch nicht geladen hat
+
 ## Version 1.1.2 (2024-04-12)
 
 * Fix: PHP Warning:  count(): Parameter must be an array or an object that implements Countable in Chessresults.php on line 230

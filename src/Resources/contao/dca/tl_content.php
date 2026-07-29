@@ -83,7 +83,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['chessresults_colsView'] = array
 	'filter'                  => true,
 	'inputType'               => 'checkboxWizard',
 	'options'                 => &$GLOBALS['TL_LANG']['tl_content']['chessresults_colsView_array'],
-	'default'                 => is_array($GLOBALS['TL_LANG']['tl_content']['chessresults_colsView_array']) ? array_keys($GLOBALS['TL_LANG']['tl_content']['chessresults_colsView_array']) : '',
+	'default'                 => is_array($GLOBALS['TL_LANG']['tl_content']['chessresults_colsView_array'] ?? null) ? array_keys($GLOBALS['TL_LANG']['tl_content']['chessresults_colsView_array'] ?? null) : '',
 	'eval'                    => array
 	(
 		'multiple'            => true,
