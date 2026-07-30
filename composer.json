@@ -1,7 +1,15 @@
 {
     "name": "schachbulle/contao-chessresults-bundle",
     "type": "contao-bundle",
-    "description": "ChessResults-Bundle für Contao 4",
+    "description": "Inhaltselement, das Turniertabellen von chess-results.com in die eigene Seite einbindet.",
+    "keywords": [
+        "contao",
+        "schach",
+        "turnier",
+        "chess-results",
+        "tabelle"
+    ],
+    "homepage": "https://github.com/Samson1964/contao-chessresults-bundle",
     "license": "LGPL-3.0-or-later",
     "authors": [
         {

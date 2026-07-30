@@ -3,6 +3,7 @@
 ## Version 1.1.3 (2026-07-29)
 
 * Fix: Warning: Undefined array key "chessresults_colsView_array" bei contao:migrate -> Lesezugriffe auf $GLOBALS['TL_LANG'] in den DCA-Dateien mit `?? null` bzw. `?? array()` abgesichert, da der DcaLoader die Sprachdateien noch nicht geladen hat
+* Change: Beschreibung, Keywords und Homepage in der composer.json ergänzt, damit Packagist das Paket verständlich darstellt und über die Suche auffindbar macht
 
 ## Version 1.1.2 (2024-04-12)
 
