@@ -1,0 +1,13 @@
+# Quelle fuer die Metadaten im Contao Manager (contao/package-metadata).
+# Aenderungen hier werden von Claude in den Fork uebertragen.
+# Der englische Block wird beim Abgleich ergaenzt, falls er fehlt.
+
+de:
+    title: ChessResults
+    description: >
+        Inhaltselement, das Turniertabellen von chess-results.com in die eigene Seite einbindet.
+    keywords:
+        - Schach
+        - Turnier
+        - Chess-Results
+        - Tabelle
